@@ -1,0 +1,149 @@
+{
+	"info": {
+		"_postman_id": "7428b454-a689-49ab-86fc-fa595d22403d",
+		"name": "colecaoviacep",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29488728"
+	},
+	"item": [
+		{
+			"name": "ConsultaCepOK",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"var schema = {\r",
+							"\r",
+							"  \"$schema\": \"http://json-schema.org/draft-04/schema#\",\r",
+							"  \"type\": \"object\",\r",
+							"  \"properties\": {\r",
+							"    \"cep\": {\r",
+							"      \"type\": \"string\"\r",
+							"    },\r",
+							"    \"logradouro\": {\r",
+							"      \"type\": \"string\"\r",
+							"    },\r",
+							"    \"complemento\": {\r",
+							"      \"type\": \"string\"\r",
+							"    },\r",
+							"    \"bairro\": {\r",
+							"      \"type\": \"string\"\r",
+							"    },\r",
+							"    \"localidade\": {\r",
+							"      \"type\": \"string\"\r",
+							"    },\r",
+							"    \"uf\": {\r",
+							"      \"type\": \"string\"\r",
+							"    },\r",
+							"    \"ibge\": {\r",
+							"      \"type\": \"string\"\r",
+							"    },\r",
+							"    \"gia\": {\r",
+							"      \"type\": \"string\"\r",
+							"    },\r",
+							"    \"ddd\": {\r",
+							"      \"type\": \"string\"\r",
+							"    },\r",
+							"    \"siafi\": {\r",
+							"      \"type\": \"string\"\r",
+							"    }\r",
+							"  },\r",
+							"  \"required\": [\r",
+							"    \"cep\",\r",
+							"    \"logradouro\",\r",
+							"    \"complemento\",\r",
+							"    \"bairro\",\r",
+							"    \"localidade\",\r",
+							"    \"uf\",\r",
+							"    \"ibge\",\r",
+							"    \"gia\",\r",
+							"    \"ddd\",\r",
+							"    \"siafi\"\r",
+							"  ]\r",
+							"}\r",
+							"\r",
+							"var jsonData = pm.response.json();\r",
+							"pm.test('Validar a estrutura do body', function (){\r",
+							"    pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Response time is less than 500ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Content-Type is present\", function () {\r",
+							"    pm.response.to.have.header(\"Content-Type\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://viacep.com.br/ws/{{via}}/json/",
+					"protocol": "https",
+					"host": [
+						"viacep",
+						"com",
+						"br"
+					],
+					"path": [
+						"ws",
+						"{{via}}",
+						"json",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ConsultaCepBadRequest",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://viacep.com.br/ws/{{viaErr}}/json/",
+					"protocol": "https",
+					"host": [
+						"viacep",
+						"com",
+						"br"
+					],
+					"path": [
+						"ws",
+						"{{viaErr}}",
+						"json",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
