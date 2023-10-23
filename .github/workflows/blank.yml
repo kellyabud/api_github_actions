@@ -1,25 +1,20 @@
 name: Test-Build
-on:
 
-  
- push:                   # EXECUÇÃO A CADA PUSH NA BRANCH MAIN
-    branches:
-     - 'main'
-      
+on: [push]
+
 jobs:
-  test-api:
+  build:
+
     runs-on: ubuntu-latest
+
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
-
-
-      # INstall Node on the runner
-      - name: Install Node
-        uses: actions/setup-node@v1
+      - uses: actions/checkout@v3
+      - name: Use Node.js
+        uses: actions/setup-node@v3
         with:
-          node-version: "16.x"
-
+          node-version: '18.x'
+      - run: npm install
+      - run: npm run build --if-present      
 
       # Install the newman command line utility and also install the html extra reporter
       - name: Install newman
@@ -36,12 +31,12 @@ jobs:
       # Run the POSTMAN collection
       - name: Run POSTMAN collection on real time
         run: |
-          newman run colecaoviacep.postman_collection.json -e ambienteviacep.postman_environment.json
+          newman run MinhaColecao.postman_collection.json -e MeuAmbiente.postman_environment.json 
 
       # Run the POSTMAN collection
       - name: Run POSTMAN collection
         run: |
-          newman run colecaoviacep.postman_collection.json -e ambienteviacep.postman_environment.json -r htmlextra --reporter-htmlextra-export testResults/htmlreport.html --reporter-htmlextra-darkTheme  > testResults/runreport1.html
+          newman run MinhaColecao.postman_collection.json -e MeuAmbiente.postman_environment.json -r htmlextra --reporter-htmlextra-export testResults/htmlreport.html --reporter-htmlextra-darkTheme  > testResults/runreport1.html
 
 
       # Upload the contents of Test Results directory to workspace
@@ -50,3 +45,7 @@ jobs:
         with:
           name: RunReports
           path: testResults
+      
+      
+          
+     
