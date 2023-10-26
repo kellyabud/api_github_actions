@@ -18,7 +18,7 @@ Este repositório contém coleções de testes e scripts para automatizar testes
 
 3. Exporte do Postman a coleção e ambiente.
 
-4.Abra o terminal e navegue até o diretório do projeto.
+4. Abra o terminal e navegue até o diretório do projeto.
 - Execute o seguinte comando para executar os testes:
 newman run ./collections/sua_colecao.json -e ./environments/seu_ambiente.json
 - Substitua sua_colecao.json e seu_ambiente.json pelos nomes de arquivo apropriados.
