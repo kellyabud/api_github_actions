@@ -1,4 +1,9 @@
 # Teste de API com Postman e Newman
+<div align="center">
+<img src="https://github.com/kellyabud/docker_actions/assets/135430840/b226ec98-6ef3-44cb-9c9e-0e983bd1a1a5" />
+</div>
+
+
 
 Este repositório contém coleções de testes e scripts para automatizar testes de API usando o Postman e o Newman.
 
